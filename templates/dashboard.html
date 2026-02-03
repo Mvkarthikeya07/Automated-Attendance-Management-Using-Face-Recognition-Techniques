@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <div class="camera-section">
+        <img src="/video_feed" class="camera-feed">
+        <div class="camera-status">Live Camera</div>
+    </div>
+
+    <div class="control-section">
+
+        <div class="card">
+            <form onsubmit="registerUser(event)">
+                <label>Student Name</label>
+                <input type="text" id="name" required>
+                <button class="btn primary">Register</button>
+            </form>
+        </div>
+
+        <div class="card">
+            <button class="btn success" onclick="takeAttendance()">Take Attendance</button>
+
+            <!-- ✅ NEW BUTTON ADDED -->
+            <button class="btn danger" onclick="endAttendance()">End Attendance</button>
+
+            <a href="/records" class="link-btn">View Records</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+function registerUser(e) {
+    e.preventDefault();
+    fetch("/register", {
+        method: "POST",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        body: "name=" + document.getElementById("name").value
+    });
+}
+
+function takeAttendance() {
+    fetch("/attendance");
+}
+
+/* ✅ NEW FUNCTION ADDED */
+function endAttendance() {
+    fetch("/end_attendance");
+}
+</script>
+
+</body>
+</html>

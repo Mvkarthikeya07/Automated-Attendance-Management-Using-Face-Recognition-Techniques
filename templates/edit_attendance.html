@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Attendance</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="edit-page">
+
+    <div class="edit-card">
+        <h2>Edit Attendance</h2>
+
+        <form method="post" action="/update">
+
+            <input type="hidden" name="id" value="{{ record[0] }}">
+
+            <label>Name</label>
+            <input type="text" value="{{ record[1] }}" readonly>
+
+            <label>Date</label>
+            <input type="date" name="date" value="{{ record[2] }}" required>
+
+            <label>Time</label>
+            <input type="time" name="time" value="{{ record[3] }}" required>
+
+            <label>Status</label>
+            <select name="status">
+                <option value="PRESENT" {% if record[4] == "PRESENT" %}selected{% endif %}>
+                    PRESENT
+                </option>
+                <option value="ABSENT" {% if record[4] == "ABSENT" %}selected{% endif %}>
+                    ABSENT
+                </option>
+            </select>
+
+            <button class="btn primary" type="submit">Update</button>
+            <a href="/records" class="link-btn">Cancel</a>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
